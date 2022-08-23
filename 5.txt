@@ -1,0 +1,884 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.*;
+
+public class Lab1 extends JFrame {
+	
+	
+    JTextField input = new JTextField("x", 5);
+    JTextField input1 = new JTextField("y", 5);
+
+    JTextArea area1 = new JTextArea(1, 15);
+
+    
+    public static final int DEFAULT_WIDTH = 1065;
+    public static final int DEFAULT_HEIGHT = 780;
+
+    public Color Color1;
+    public Color Color4;
+    public Color Color3;
+   
+    
+    public DrawComponent c;
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Lab1();
+            }
+        });
+    }
+
+    public Lab1() {
+    	setResizable(false);
+        Container container = getContentPane();
+        container.setBackground(new Color(255, 255, 255));
+        container.setLayout(new BorderLayout(20, 20));
+        container.setPreferredSize(
+                new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+        
+        ButtonListener1 listener1 = new ButtonListener1();
+        ButtonListener2 listener2 = new ButtonListener2();
+
+        
+        JButton j1 = new JButton("Задати дані");
+        j1.addActionListener(listener1);
+        JButton j2 = new JButton("Вивести результат");
+        j2.addActionListener(listener2); 
+
+
+        
+        container.add(j1);
+        container.add(j2, BorderLayout.SOUTH);
+        container.add(input);
+        container.add(input1);
+      
+        container.add(area1);
+       
+       
+        j1.setBounds(0,140,DEFAULT_WIDTH,25);
+        input.setBounds(460,20,60,20);
+        input1.setBounds(550,20,60,20);
+       
+        area1.setBounds(335,80,400,20);
+       
+        
+        c = new DrawComponent();
+        container.add(c, BorderLayout.CENTER);
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pack();
+        setVisible(true); 
+    }
+    
+   
+     
+     int R=3;
+     int D = R*10;
+     int x = 2;
+     int y = 0;
+     String str1 = new String("Центр нового кола повинен розміщуватися поза межами існуючого :(");
+     double x1 = -1000;
+     double y1 = -1000;
+     double R1= 1;
+     double D1 = 2;
+   int ind = 0;
+  	 
+  public class ButtonListener1 implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            JButton j1 = (JButton) event.getSource();
+            
+               String ext = input.getText();
+			   double foo = Double.parseDouble(ext);
+			   
+			   String ext1 = input1.getText();
+			   double foo1 = Double.parseDouble(ext1);
+			   
+		if((Math.sqrt(((((foo-x)*(foo-x))+((foo1-y)*(foo1-y))))-R)*10)>20) {
+				
+				    x1 = foo;
+			           y1 = foo1;
+			           R1= Math.sqrt(((x1-x)*(x1-x))+((y1-y)*(y1-y)));
+			          D1 = ((R1-R)*10);		 
+					  ind = 0;
+					
+		}
+			else
+			{
+					  
+				x1 = -1000;
+			    y1 = -1000;
+			    R1= 1;
+			     D1 = 2;
+		      ind = 1;
+		}
+				 
+        }}
+  
+  
+
+  
+ 
+  
+  public void setColor4() {
+      this.Color1 = new Color(255, 255, 255);
+      this.Color3 = new Color(0, 0, 0);
+     
+     
+  }
+  
+  
+     
+  
+  
+
+    public class DrawComponent extends JComponent {
+
+        @Override
+        public void paint(Graphics g) {
+        	 
+            Graphics2D g2 = (Graphics2D) g;
+            
+            g2.setColor(Color1);
+            Rectangle2D.Double rectangle4 = 
+                    new Rectangle2D.Double(20, 400, 200, 200);
+                    g2.draw(rectangle4);
+                    g2.setColor(Color1);
+                    g2.fill(rectangle4);   
+                
+                    setColor4();
+                    
+                    
+                    Rectangle2D.Double rectangle1 = 
+                            new Rectangle2D.Double(20, 500, 570, 2);
+                   
+                            g2.draw(rectangle1);
+                            g2.setColor(Color3);
+                            g2.fill(rectangle1);   
+                            setColor4();
+                            
+                            
+                     Rectangle2D.Double rectangle2 = 
+                     new Rectangle2D.Double(120, 495, 1, 10);
+                     g2.draw(rectangle2);
+                     g2.setColor(Color3);
+                     g2.fill(rectangle2);   
+                     setColor4(); 
+                       
+                     Rectangle2D.Double rectangle3 = 
+                             new Rectangle2D.Double(130, 495, 1, 10);
+                             g2.draw(rectangle3);
+                             g2.setColor(Color3);
+                             g2.fill(rectangle3);   
+                             setColor4(); 
+                             
+                   Rectangle2D.Double rectangle5 = 
+                   new Rectangle2D.Double(306, 490, 10, 1);
+                   g2.draw(rectangle5);
+                   g2.setColor(Color3);
+                   g2.fill(rectangle5);   
+                   setColor4(); 
+                  
+                   Rectangle2D.Double rectangle6 = 
+                   new Rectangle2D.Double(306, 480, 10, 1);
+                   g2.draw(rectangle6);
+                   g2.setColor(Color3);
+                   g2.fill(rectangle6);   
+                   setColor4();    
+                   
+                   Rectangle2D.Double rectangle7 = 
+                           new Rectangle2D.Double(306, 470, 10, 1);
+                           g2.draw(rectangle7);
+                           g2.setColor(Color3);
+                           g2.fill(rectangle7);   
+                           setColor4();   
+                 
+                  Rectangle2D.Double rectangle8 = 
+                                   new Rectangle2D.Double(306, 460, 10, 1);
+                                   g2.draw(rectangle8);
+                                   g2.setColor(Color3);
+                                   g2.fill(rectangle8);   
+                                   setColor4();  
+                                   
+                                   
+                Rectangle2D.Double rectangle9 = 
+                new Rectangle2D.Double(306, 450, 10, 1);
+                g2.draw(rectangle9);
+                g2.setColor(Color3);
+                g2.fill(rectangle9);   
+                setColor4(); 
+                
+                Rectangle2D.Double rectangle10 = 
+                new Rectangle2D.Double(306, 440, 10, 1);
+                g2.draw(rectangle10);
+                g2.setColor(Color3);
+                g2.fill(rectangle10);   
+                setColor4(); 
+                
+                Rectangle2D.Double rectangle11 = 
+                new Rectangle2D.Double(306, 430, 10, 1);
+                g2.draw(rectangle11);
+                g2.setColor(Color3);
+                g2.fill(rectangle11);   
+                setColor4();
+                
+                Rectangle2D.Double rectangle12 = 
+                new Rectangle2D.Double(306, 420, 10, 1);
+                g2.draw(rectangle12);
+                g2.setColor(Color3);
+                g2.fill(rectangle12);   
+                setColor4();
+                
+                Rectangle2D.Double rectangle13 = 
+                new Rectangle2D.Double(306, 410, 10, 1);
+                g2.draw(rectangle13);
+                g2.setColor(Color3);
+                g2.fill(rectangle13);   
+                setColor4();
+                Rectangle2D.Double rectangle730 = 
+                        new Rectangle2D.Double(306, 400, 10, 1);
+                        g2.draw(rectangle730);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle730);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle731 = 
+                        new Rectangle2D.Double(306, 390, 10, 1);
+                        g2.draw(rectangle731);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle731);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle732 = 
+                        new Rectangle2D.Double(306, 380, 10, 1);
+                        g2.draw(rectangle732);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle732);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle733 = 
+                        new Rectangle2D.Double(306, 370, 10, 1);
+                        g2.draw(rectangle733);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle733);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle734 = 
+                        new Rectangle2D.Double(306, 360, 10, 1);
+                        g2.draw(rectangle734);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle734);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle735 = 
+                        new Rectangle2D.Double(306, 350, 10, 1);
+                        g2.draw(rectangle735);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle735);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle736 = 
+                        new Rectangle2D.Double(306, 340, 10, 1);
+                        g2.draw(rectangle736);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle736);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle737 = 
+                        new Rectangle2D.Double(306, 330, 10, 1);
+                        g2.draw(rectangle737);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle737);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle738 = 
+                        new Rectangle2D.Double(306, 320, 10, 1);
+                        g2.draw(rectangle738);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle738);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle739 = 
+                        new Rectangle2D.Double(306, 310, 10, 1);
+                        g2.draw(rectangle739);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle739);   
+                        setColor4();
+
+
+                   Rectangle2D.Double rectangle740 = 
+                        new Rectangle2D.Double(306, 300, 10, 1);
+                        g2.draw(rectangle740);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle740);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle741 = 
+                        new Rectangle2D.Double(306, 290, 10, 1);
+                        g2.draw(rectangle741);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle741);   
+                        setColor4();
+
+                   Rectangle2D.Double rectangle742 = 
+                        new Rectangle2D.Double(306, 280, 10, 1);
+                        g2.draw(rectangle742);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle742);   
+                        setColor4();
+                        
+                        Rectangle2D.Double rectangle743 = 
+                                new Rectangle2D.Double(306, 270, 10, 1);
+                                g2.draw(rectangle743);
+                                g2.setColor(Color3);
+                                g2.fill(rectangle743);   
+                                setColor4();
+                Rectangle2D.Double rectangle14 = 
+                        new Rectangle2D.Double(306, 510, 10, 1);
+                        g2.draw(rectangle14);
+                        g2.setColor(Color3);
+                        g2.fill(rectangle14);   
+                        setColor4(); 
+                
+              Rectangle2D.Double rectangle15 = 
+              new Rectangle2D.Double(306, 520, 10, 1);
+              g2.draw(rectangle15);
+              g2.setColor(Color3);
+              g2.fill(rectangle15);   
+              setColor4(); 
+              
+              Rectangle2D.Double rectangle16 = 
+              new Rectangle2D.Double(306, 530, 10, 1);
+              g2.draw(rectangle16);
+              g2.setColor(Color3);
+              g2.fill(rectangle16);   
+              setColor4(); 
+              
+              Rectangle2D.Double rectangle17 = 
+              new Rectangle2D.Double(306, 540, 10, 1);
+              g2.draw(rectangle17);
+              g2.setColor(Color3);
+              g2.fill(rectangle17);   
+              setColor4(); 
+              
+              Rectangle2D.Double rectangle18 = 
+              new Rectangle2D.Double(306, 550, 10, 1);
+              g2.draw(rectangle18);
+              g2.setColor(Color3);
+              g2.fill(rectangle18);   
+              setColor4(); 
+              
+              Rectangle2D.Double rectangle19 = 
+              new Rectangle2D.Double(306, 560, 10, 1);
+              g2.draw(rectangle19);
+              g2.setColor(Color3);
+              g2.fill(rectangle19);   
+              setColor4(); 
+              
+              Rectangle2D.Double rectangle20 = 
+              new Rectangle2D.Double(306, 570, 10, 1);
+              g2.draw(rectangle20);
+              g2.setColor(Color3);
+              g2.fill(rectangle20);   
+              setColor4(); 
+            
+                  
+              Rectangle2D.Double rectangle21 = 
+            		     new Rectangle2D.Double(306, 580, 10, 1);
+            		     g2.draw(rectangle21);
+            		     g2.setColor(Color3);
+            		     g2.fill(rectangle21);
+            		     
+            		     Rectangle2D.Double rectangle121 = 
+            	    		     new Rectangle2D.Double(306, 590, 10, 1);
+            	    		     g2.draw(rectangle121);
+            	    		     g2.setColor(Color3);
+            	    		     g2.fill(rectangle121);
+            	    		     
+            	    		     Rectangle2D.Double rectangle122 = 
+            	    	    		     new Rectangle2D.Double(306, 600, 10, 1);
+            	    	    		     g2.draw(rectangle122);
+            	    	    		     g2.setColor(Color3);
+            	    	    		     g2.fill(rectangle122);
+            	    	    		    
+
+            	 Rectangle2D.Double rectangle623 = 
+            	    	    	    		     new Rectangle2D.Double(306, 610, 10, 1);
+            	    	    	    		     g2.draw(rectangle623);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle623);
+
+            	 Rectangle2D.Double rectangle624 = 
+            	    	    	    		     new Rectangle2D.Double(306, 620, 10, 1);
+            	    	    	    		     g2.draw(rectangle624);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle624);
+
+            	 Rectangle2D.Double rectangle625 = 
+            	    	    	    		     new Rectangle2D.Double(306, 630, 10, 1);
+            	    	    	    		     g2.draw(rectangle625);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle625);
+
+            	 Rectangle2D.Double rectangle626 = 
+            	    	    	    		     new Rectangle2D.Double(306, 640, 10, 1);
+            	    	    	    		     g2.draw(rectangle626);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle626);
+
+            	 Rectangle2D.Double rectangle627 = 
+            	    	    	    		     new Rectangle2D.Double(306, 650, 10, 1);
+            	    	    	    		     g2.draw(rectangle627);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle627);
+
+            	 Rectangle2D.Double rectangle628 = 
+            	    	    	    		     new Rectangle2D.Double(306, 660, 10, 1);
+            	    	    	    		     g2.draw(rectangle628);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle628);
+
+            	 Rectangle2D.Double rectangle629 = 
+            	    	    	    		     new Rectangle2D.Double(306, 670, 10, 1);
+            	    	    	    		     g2.draw(rectangle629);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle629);
+
+            	 Rectangle2D.Double rectangle630 = 
+            	    	    	    		     new Rectangle2D.Double(306, 680, 10, 1);
+            	    	    	    		     g2.draw(rectangle630);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle630);
+
+            	 Rectangle2D.Double rectangle631 = 
+            	    	    	    		     new Rectangle2D.Double(306, 690, 10, 1);
+            	    	    	    		     g2.draw(rectangle631);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle631);
+
+            	 Rectangle2D.Double rectangle632 = 
+            	    	    	    		     new Rectangle2D.Double(306, 700, 10, 1);
+            	    	    	    		     g2.draw(rectangle632);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle632);
+
+            	 Rectangle2D.Double rectangle633 = 
+            	    	    	    		     new Rectangle2D.Double(306, 710, 10, 1);
+            	    	    	    		     g2.draw(rectangle633);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle633);
+
+            	 Rectangle2D.Double rectangle634 = 
+            	    	    	    		     new Rectangle2D.Double(306, 720, 10, 1);
+            	    	    	    		     g2.draw(rectangle634);
+            	    	    	    		     g2.setColor(Color3);
+            	    	    	    		     g2.fill(rectangle634);
+
+            	 
+              Rectangle2D.Double rectangle22 = 
+              new Rectangle2D.Double(140, 495, 1, 10);
+              g2.draw(rectangle22);
+              g2.setColor(Color3);
+              g2.fill(rectangle22);
+              
+              Rectangle2D.Double rectangle23 = 
+            	      new Rectangle2D.Double(150, 495, 1, 10);
+            	      g2.draw(rectangle23);
+            	      g2.setColor(Color3);
+            	      g2.fill(rectangle23);
+            	      
+               Rectangle2D.Double rectangle24 = 
+               new Rectangle2D.Double(160, 495, 1, 10);
+               g2.draw(rectangle24);
+               g2.setColor(Color3);
+               g2.fill(rectangle24);
+               
+               Rectangle2D.Double rectangle25 = 
+            	       new Rectangle2D.Double(170, 495, 1, 10);
+            	       g2.draw(rectangle25);
+            	       g2.setColor(Color3);
+            	       g2.fill(rectangle25);
+            	       
+              Rectangle2D.Double rectangle26 = 
+               new Rectangle2D.Double(180, 495, 1, 10);
+               g2.draw(rectangle26);
+               g2.setColor(Color3);
+               g2.fill(rectangle26);
+               
+               Rectangle2D.Double rectangle27 = 
+               new Rectangle2D.Double(190, 495, 1, 10);
+               g2.draw(rectangle27);
+               g2.setColor(Color3);
+               g2.fill(rectangle27);
+               
+               
+               Rectangle2D.Double rectangle28 = 
+            	       new Rectangle2D.Double(200, 495, 1, 10);
+            	       g2.draw(rectangle28);
+            	       g2.setColor(Color3);
+            	       g2.fill(rectangle28);
+            	       
+            	Rectangle2D.Double rectangle29 = 
+            	    	       new Rectangle2D.Double(210, 495, 1, 10);
+            	    	       g2.draw(rectangle29);
+            	    	       g2.setColor(Color3);
+            	    	       g2.fill(rectangle29);
+            	    	       
+              Rectangle2D.Double rectangle130 = 
+            	    	    	       new Rectangle2D.Double(220, 495, 1, 10);
+            	    	    	       g2.draw(rectangle130);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle130);
+            	 
+
+
+            	 Rectangle2D.Double rectangle131 = 
+            	    	    	    	       new Rectangle2D.Double(230, 495, 1, 10);
+            	    	    	    	       g2.draw(rectangle131);
+            	    	    	    	       g2.setColor(Color3);
+            	    	    	    	       g2.fill(rectangle131);
+
+            	 Rectangle2D.Double rectangle132 = 
+            	    	    	    	       new Rectangle2D.Double(240, 495, 1, 10);
+            	    	    	    	       g2.draw(rectangle132);
+            	    	    	    	       g2.setColor(Color3);
+            	    	    	    	       g2.fill(rectangle132);
+
+            	 Rectangle2D.Double rectangle133 = 
+            	    	    	    	       new Rectangle2D.Double(250, 495, 1, 10);
+            	    	    	    	       g2.draw(rectangle133);
+            	    	    	    	       g2.setColor(Color3);
+            	    	    	    	       g2.fill(rectangle133);
+
+            	 Rectangle2D.Double rectangle134 = 
+            	    	    	    	       new Rectangle2D.Double(260, 495, 1, 10);
+            	    	    	    	       g2.draw(rectangle134);
+            	    	    	    	       g2.setColor(Color3);
+            	    	    	    	       g2.fill(rectangle134);
+
+            	 Rectangle2D.Double rectangle135 = 
+            	    	    	    	       new Rectangle2D.Double(270, 495, 1, 10);
+            	    	    	    	       g2.draw(rectangle135);
+            	    	    	    	       g2.setColor(Color3);
+            	    	    	    	       g2.fill(rectangle135);
+
+            	 Rectangle2D.Double rectangle136 = 
+            	    	    	    	       new Rectangle2D.Double(280, 495, 1, 10);
+            	    	    	    	       g2.draw(rectangle136);
+            	    	    	    	       g2.setColor(Color3);
+            	    	    	    	       g2.fill(rectangle136);
+
+            	 Rectangle2D.Double rectangle137 = 
+            	    	    	    	       new Rectangle2D.Double(290, 495, 1, 10);
+            	    	    	    	       g2.draw(rectangle137);
+            	    	    	    	       g2.setColor(Color3);
+            	    	    	    	       g2.fill(rectangle137);
+
+            	 Rectangle2D.Double rectangle138 = 
+            	    	    	    	       new Rectangle2D.Double(300, 495, 1, 10);
+            	    	    	    	       g2.draw(rectangle138);
+            	    	    	    	       g2.setColor(Color3);
+            	    	    	    	       g2.fill(rectangle138);
+
+            	 Rectangle2D.Double rectangle139 = 
+            	    	    	    	       new Rectangle2D.Double(310, 260, 2, 1000);
+            	    	    	    	       g2.draw(rectangle139);
+            	    	    	    	       g2.setColor(Color3);
+            	    	    	    	       g2.fill(rectangle139);	    
+          
+            	    	    	    	       Rectangle2D.Double rectangle140 = 
+            	    	    	    	    	       new Rectangle2D.Double(320, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle140);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle140);
+
+            	    	Rectangle2D.Double rectangle141 = 
+            	    	    	    	    	       new Rectangle2D.Double(330, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle141);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle141);
+
+            	    	Rectangle2D.Double rectangle142 = 
+            	    	    	    	    	       new Rectangle2D.Double(340, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle142);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle142);
+
+            	    	Rectangle2D.Double rectangle143 = 
+            	    	    	    	    	       new Rectangle2D.Double(350, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle143);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle143);
+
+            	    	Rectangle2D.Double rectangle144 = 
+            	    	    	    	    	       new Rectangle2D.Double(360, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle144);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle144);
+
+            	    	Rectangle2D.Double rectangle145 = 
+            	    	    	    	    	       new Rectangle2D.Double(370, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle145);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle145);
+
+            	    	Rectangle2D.Double rectangle146 = 
+            	    	    	    	    	       new Rectangle2D.Double(380, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle146);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle146);
+
+            	    	Rectangle2D.Double rectangle147 = 
+            	    	    	    	    	       new Rectangle2D.Double(390, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle147);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle147);
+
+            	    	Rectangle2D.Double rectangle148 = 
+            	    	    	    	    	       new Rectangle2D.Double(400, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle148);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle148);
+
+            	    	Rectangle2D.Double rectangle149 = 
+            	    	    	    	    	       new Rectangle2D.Double(410, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle149);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle149);
+
+            	    	Rectangle2D.Double rectangle150 = 
+            	    	    	    	    	       new Rectangle2D.Double(420, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle150);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle150);
+
+            	    	Rectangle2D.Double rectangle151 = 
+            	    	    	    	    	       new Rectangle2D.Double(430, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle151);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle151);
+
+            	    	Rectangle2D.Double rectangle152 = 
+            	    	    	    	    	       new Rectangle2D.Double(440, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle152);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle152);
+
+            	    	Rectangle2D.Double rectangle153 = 
+            	    	    	    	    	       new Rectangle2D.Double(450, 495, 1, 10);
+            	    	    	    	    	       g2.draw(rectangle153);
+            	    	    	    	    	       g2.setColor(Color3);
+            	    	    	    	    	       g2.fill(rectangle153);
+            	    	    	    	    	       
+
+        Rectangle2D.Double rectangle154 = 
+            	    	    	       new Rectangle2D.Double(460, 495, 1, 10);
+            	    	    	       g2.draw(rectangle154);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle154);
+
+
+        Rectangle2D.Double rectangle155 = 
+            	    	    	       new Rectangle2D.Double(470, 495, 1, 10);
+            	    	    	       g2.draw(rectangle155);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle155);
+
+
+        Rectangle2D.Double rectangle156 = 
+            	    	    	       new Rectangle2D.Double(480, 495, 1, 10);
+            	    	    	       g2.draw(rectangle156);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle156);
+
+
+        Rectangle2D.Double rectangle157 = 
+            	    	    	       new Rectangle2D.Double(490, 495, 1, 10);
+            	    	    	       g2.draw(rectangle157);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle157);
+
+
+        Rectangle2D.Double rectangle158 = 
+            	    	    	       new Rectangle2D.Double(500, 495, 1, 10);
+            	    	    	       g2.draw(rectangle158);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle158);
+
+
+        Rectangle2D.Double rectangle159 = 
+            	    	    	       new Rectangle2D.Double(510, 495, 1, 10);
+            	    	    	       g2.draw(rectangle159);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle159);
+
+
+        Rectangle2D.Double rectangle160 = 
+            	    	    	       new Rectangle2D.Double(520, 495, 1, 10);
+            	    	    	       g2.draw(rectangle160);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle160);
+
+
+        Rectangle2D.Double rectangle161 = 
+            	    	    	       new Rectangle2D.Double(530, 495, 1, 10);
+            	    	    	       g2.draw(rectangle161);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle161);
+
+
+        Rectangle2D.Double rectangle162 = 
+            	    	    	       new Rectangle2D.Double(540, 495, 1, 10);
+            	    	    	       g2.draw(rectangle162);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle162);
+
+
+        Rectangle2D.Double rectangle163 = 
+            	    	    	       new Rectangle2D.Double(550, 495, 1, 10);
+            	    	    	       g2.draw(rectangle163);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle163);
+
+
+        Rectangle2D.Double rectangle164 = 
+            	    	    	       new Rectangle2D.Double(560, 495, 1, 10);
+            	    	    	       g2.draw(rectangle164);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle164);
+
+
+        Rectangle2D.Double rectangle165 = 
+            	    	    	       new Rectangle2D.Double(570, 495, 1, 10);
+            	    	    	       g2.draw(rectangle165);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle165);
+
+
+        Rectangle2D.Double rectangle166 = 
+            	    	    	       new Rectangle2D.Double(580, 495, 1, 10);
+            	    	    	       g2.draw(rectangle166);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle166);
+
+
+            	 Rectangle2D.Double rectangle30 = 
+            	    	    	       new Rectangle2D.Double(110, 495, 1, 10);
+            	    	    	       g2.draw(rectangle30);
+            	    	    	       g2.setColor(Color3);
+            	    	    	       g2.fill(rectangle30);
+            	    	    	       
+            Rectangle2D.Double rectangle31 = 
+                new Rectangle2D.Double(100, 495, 1, 10);
+            	    g2.draw(rectangle31);
+            	  g2.setColor(Color3);
+            	  g2.fill(rectangle31);
+          
+            	  Rectangle2D.Double rectangle32 = 
+            		        new Rectangle2D.Double(90, 495, 1, 10);
+            		    	    g2.draw(rectangle32);
+            		    	  g2.setColor(Color3);
+            		    	  g2.fill(rectangle32);
+            		    	  
+            Rectangle2D.Double rectangle33 = 
+            new Rectangle2D.Double(80, 495, 1, 10);
+            g2.draw(rectangle33);
+            g2.setColor(Color3);
+            g2.fill(rectangle33);   	
+            
+            Rectangle2D.Double rectangle34 = 
+            	    new Rectangle2D.Double(70, 495, 1, 10);
+            	    g2.draw(rectangle34);
+            	    g2.setColor(Color3);
+            	    g2.fill(rectangle34); 
+            	    
+            Rectangle2D.Double rectangle35 = 
+            new Rectangle2D.Double(60, 495, 1, 10);
+            g2.draw(rectangle35);
+            g2.setColor(Color3);
+            g2.fill(rectangle35);
+            
+            Rectangle2D.Double rectangle36 = 
+            	    new Rectangle2D.Double(50, 495, 1, 10);
+            	    g2.draw(rectangle36);
+            	    g2.setColor(Color3);
+            	    g2.fill(rectangle36);  
+            	    
+            	    Rectangle2D.Double rectangle37 = 
+            	    	    new Rectangle2D.Double(40, 495, 1, 10);
+            	    	    g2.draw(rectangle37);
+            	    	    g2.setColor(Color3);
+            	    	    g2.fill(rectangle37); 
+            	    	    
+            	  Rectangle2D.Double rectangle38 = 
+            	  new Rectangle2D.Double(30, 495, 1, 10);
+            	  g2.draw(rectangle38);
+            	  g2.setColor(Color3);
+            	  g2.fill(rectangle38);
+            	  
+
+            	  g2.setPaint(Color.BLACK);
+                  g.fillPolygon(new int [] {312, 307, 316}, new int [] {255, 267 , 267}, 3);
+                  
+                  g2.setPaint(Color.BLACK);
+                  g.fillPolygon(new int [] {590, 590, 602}, new int [] {497, 505 , 501}, 3);
+            	  //////////////////////////////////////////////////////////////////////////
+      
+                  g2.setPaint(Color.RED);
+                  g.drawOval(311-D+(x*10),501-D+(y*10),D*2,D*2);
+                  
+             
+               
+                  g2.setPaint(Color.GREEN);
+                  g.drawOval(311-(int)D1+((int)x1*10),501-(int)D1-((int)y1*10),(int)D1*2,(int)D1*2);
+                
+          
+                  g.setColor(Color.BLUE);
+                  Rectangle2D.Double rectangle1430 = 
+                  new Rectangle2D.Double(0, 0, 1200, 150);
+                  g2.draw(rectangle1430);
+                  g.setColor(Color.BLUE);
+                 g2.fill(rectangle1430);   
+                 setColor4();  
+                  
+         
+                          
+         
+        }
+    }
+
+    public class ButtonListener2 implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            JButton j2 = (JButton) event.getSource();
+           
+            
+            setColor4(); 
+         if (ind==0) {
+            str1 = ("(x-"+x1+")²+(y-"+y1+")²="+(D1*D1/100));
+            area1.setText("(x-"+x1+")²+(y-"+y1+")²="+(D1*D1/100));
+         }
+         else {
+        	 str1 = ("Центр нового кола повинен розміщуватися поза межами існуючого :(");
+             area1.setText(str1);
+         }
+         
+           
+            
+            c.repaint();
+        }
+    }
+}

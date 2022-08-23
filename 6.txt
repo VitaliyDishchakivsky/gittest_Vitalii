@@ -1,0 +1,243 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
+import static java.lang.Math.*;
+import javax.swing.*;
+public class Lab1 extends JFrame {
+	
+	
+    JTextField input = new JTextField("A", 5);
+    JTextField input1 = new JTextField("B", 5);
+
+    JTextArea area1 = new JTextArea(1, 15);
+
+    
+    public static final int DEFAULT_WIDTH = 640;
+    public static final int DEFAULT_HEIGHT = 795;
+
+    public Color Color1;
+    public Color Color4;
+    public Color Color3;
+   
+    
+    public DrawComponent c;
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Lab1();
+            }
+        });
+    }
+
+    public Lab1() {
+    	setResizable(false);
+        Container container = getContentPane();
+        container.setBackground(new Color(255, 255, 255));
+        container.setLayout(new BorderLayout(20, 20));
+        container.setPreferredSize(
+                new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+        
+        ButtonListener1 listener1 = new ButtonListener1();
+        ButtonListener2 listener2 = new ButtonListener2();
+        ButtonListener3 listener3 = new ButtonListener3();
+        ButtonListener4 listener4 = new ButtonListener4();
+
+        
+        JButton j1 = new JButton("Результат");
+        j1.addActionListener(listener1);
+        JButton j2 = new JButton("+");
+        j2.addActionListener(listener2); 
+        JButton j3 = new JButton("-");
+        j3.addActionListener(listener3); 
+        JButton j4 = new JButton("Колір");
+        j4.addActionListener(listener4); 
+
+        
+        container.add(j1);
+        container.add(j2);
+        container.add(j3);
+        container.add(j4);
+        container.add(input);
+        container.add(input1);
+     
+        j1.setBounds(0,768,100,25);
+        j2.setBounds(DEFAULT_WIDTH-50,742,50,25);
+        j3.setBounds(DEFAULT_WIDTH-50,768,50,25);
+        j4.setBounds(0,742,100,25);
+        input.setBounds(100,742,490,25);
+        input1.setBounds(100,768,490,25);
+       
+       
+        
+        c = new DrawComponent();
+        container.add(c, BorderLayout.CENTER);
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pack();
+        setVisible(true); 
+    }
+    
+   
+     
+   double a1 = 0;
+   double b1 = 0;
+   double c1 = 0.5;
+   int m = 0;
+  	 
+  public class ButtonListener1 implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            JButton j1 = (JButton) event.getSource();
+            
+               String ext = input.getText();
+			   double foo = Double.parseDouble(ext);
+			   
+			   String ext1 = input1.getText();
+			   double foo1 = Double.parseDouble(ext1);
+			   
+			   a1 = foo;
+			   b1 = foo1;
+			   c.repaint();
+				 
+        }}
+  
+  public class ButtonListener2 implements ActionListener {
+
+      @Override
+      public void actionPerformed(ActionEvent event) {
+          JButton j2 = (JButton) event.getSource();
+          
+           c1=c1+0.5;
+			   c.repaint();
+				 
+      }}
+  
+  public class ButtonListener3 implements ActionListener {
+
+      @Override
+      public void actionPerformed(ActionEvent event) {
+          JButton j3 = (JButton) event.getSource();
+          
+          c1=c1-0.5;
+          if(c1<0) {
+        	  c1=0;
+          }
+			   c.repaint();
+				 
+      }}
+  
+  public class ButtonListener4 implements ActionListener {
+
+      @Override
+      public void actionPerformed(ActionEvent event) {
+          JButton j4 = (JButton) event.getSource();
+          
+          m=m+1;
+          if(m>5) {
+        	  m=0;
+          }
+          c.repaint();		 
+      }}
+  
+ 
+  
+  public void setColor4() {
+      this.Color1 = new Color(255, 255, 255);
+      this.Color3 = new Color(0, 0, 0);
+     
+     
+  }
+  
+  
+     
+  
+  
+
+    public class DrawComponent extends JComponent {
+
+        @Override
+        public void paint(Graphics g) {
+          
+      
+             double angle = toRadians(45);
+      
+             int w = 640;
+             int center = w / 2;
+             int margin = 10;
+             int numRings = 8;
+      
+             int spacing = (w - 2 * margin) / (numRings * 2);
+      
+             for (int i = 0; i < numRings; i++) {
+                 int pos = margin + i * spacing;
+                 int size = w - (2 * margin + i * 2 * spacing);
+                 g.drawOval(pos, pos, size, size);
+      
+                 double ia = i * angle;
+                 int x2 = center + (int) (cos(ia) * (w - 2 * margin) / 2);
+                 int y2 = center - (int) (sin(ia) * (w - 2 * margin) / 2);
+      
+                 g.drawLine(center, center, x2, y2);
+                 g.setColor(Color.black);
+             }
+            	
+                
+          
+                 double degrees = toRadians(0.1);
+                 double center1 = 640/ 2;
+                 double end = 360 * 2 * 10 * degrees;
+                 double a = a1*100;
+                 double b = b1*100;
+                 double c = c1;
+                
+                 for (double theta = 0; theta < end; theta += degrees) {
+                     double r =( a + b )/ pow(theta, 1 / c);
+                     double x = r * cos(theta);
+                     double y = r * sin(theta);
+        
+                         g.drawOval((int) (center1 + x),(int) (center1 - y), 1, 1);
+                         if(m==0) {
+                         g.setColor(Color.red);
+                         } else if(m==1) {
+                        	 g.setColor(Color.orange);
+                     }else if(m==2) {
+                    	 g.setColor(Color.yellow);
+                 }else if(m==3) {
+                	 g.setColor(Color.green);
+             }
+                 else if(m==4) {
+                	 g.setColor(Color.blue);
+             }
+                 else if(m==5) {
+                	 g.setColor(Color.pink);
+             }
+                
+                 
+         
+        }
+                 Graphics2D g2 = (Graphics2D) g;
+             	g.setColor(Color.BLUE);
+                  Rectangle2D.Double rectangle1430 = 
+                  new Rectangle2D.Double(0, 700, 1200, 150);
+                  g2.draw(rectangle1430);
+                  g.setColor(Color.BLUE);
+                 g2.fill(rectangle1430);   
+                 setColor4();  
+    }
+        
+
+  
+}}
